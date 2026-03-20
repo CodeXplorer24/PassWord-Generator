@@ -1,26 +1,60 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Generate(){
     const [pass, setPass] = useState("");
-    
-    function handlePassGen (){
-        const passLen = 8;
-        const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        let password = "";
-        for(let i = 0; i < passLen; ++i){
-            const randNo = Math.floor(Math.random() * alphabet.length);
-            password += alphabet[randNo];
+    const [len, setLen] = useState(8);
+    const [isCharAllowed, setIsCharAllowed] = useState(false);
+    const [isNumAllowed, setIsNumAllowd] = useState(false);
+
+    useEffect(() => {
+        let str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        let generatedPass = ""
+        if(isCharAllowed){str += "@#$%^&*()_~"}
+        if(isNumAllowed) {str += "0123456789"}
+        for(let i = 1; i <= len; ++i){
+            let randNo = Math.floor(Math.random()*str.length)
+            generatedPass += str.charAt(randNo);
         }
-        setPass(password);
-        console.log(password);
-        console.log(pass);
-        
-    }
+        setPass(generatedPass);
+    }, [len,isNumAllowed,isCharAllowed]);
+
     return (
         <div>
-            <h1 style={{color : "red"}}>Password Generator</h1>
-            <button onClick={handlePassGen}>Generate</button>
-            <h2>Generated Password : {pass}</h2>
+            <h1>PassWord Generator</h1>
+            <div>
+                <input
+                type="text"
+                value={pass}
+                placeholder="PassWord"
+                readOnly
+                />
+            </div>
+            <div>
+                <input 
+                type="range"
+                value={len}
+                min={8}
+                max={100}
+                onChange={(e) => {setLen(e.target.value)}}
+                />
+                <label htmlFor="length">Length : {len}</label>
+            </div>
+            <div>
+                <input 
+                type="checkbox"
+                defaultChecked = {isNumAllowed}
+                onChange={() => {setIsNumAllowd(prev => !prev)}}
+                />
+                <label htmlFor="Number">Numbers</label>
+            </div>
+            <div>
+                <input 
+                type="checkbox"
+                defaultChecked = {isCharAllowed}
+                onChange={() => {setIsCharAllowed(prev => !prev)}}
+                />
+                <label htmlFor="Characters">Characters</label>
+            </div>
         </div>
     )
 }
