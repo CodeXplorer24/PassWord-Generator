@@ -4,7 +4,7 @@ export default function Generate(){
     const [pass, setPass] = useState("");
     const [len, setLen] = useState(8);
     const [isCharAllowed, setIsCharAllowed] = useState(false);
-    const [isNumAllowed, setIsNumAllowd] = useState(false);
+    const [isNumAllowed, setIsNumAllowed] = useState(false);
 
     useEffect(() => {
         let str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -19,42 +19,51 @@ export default function Generate(){
     }, [len,isNumAllowed,isCharAllowed]);
 
     return (
-        <div>
-            <h1>PassWord Generator</h1>
-            <div>
-                <input
-                type="text"
-                value={pass}
-                placeholder="PassWord"
-                readOnly
-                />
-            </div>
-            <div>
-                <input 
-                type="range"
-                value={len}
-                min={8}
-                max={100}
-                onChange={(e) => {setLen(e.target.value)}}
-                />
-                <label htmlFor="length">Length : {len}</label>
-            </div>
-            <div>
-                <input 
-                type="checkbox"
-                defaultChecked = {isNumAllowed}
-                onChange={() => {setIsNumAllowd(prev => !prev)}}
-                />
-                <label htmlFor="Number">Numbers</label>
-            </div>
-            <div>
-                <input 
-                type="checkbox"
-                defaultChecked = {isCharAllowed}
-                onChange={() => {setIsCharAllowed(prev => !prev)}}
-                />
-                <label htmlFor="Characters">Characters</label>
-            </div>
-        </div>
+    <div className="generator-container">
+      <h1 className="generator-title">Password Generator</h1>
+
+      <div className="generator-output">
+        <input
+          type="text"
+          value={pass}
+          placeholder="Password"
+          readOnly
+          className="password-field"
+        />
+      </div>
+
+      <div className="generator-control">
+        <input
+          type="range"
+          value={len}
+          min={8}
+          max={100}
+          onChange={(e) => setLen(parseInt(e.target.value))}
+          className="length-slider"
+        />
+        <label className="control-label">Length : {len}</label>
+      </div>
+
+      <div className="generator-control">
+        <input
+          type="checkbox"
+          checked={isNumAllowed}
+          onChange={() => setIsNumAllowed(prev => !prev)}
+          className="checkbox-input"
+        />
+        <label className="control-label">Numbers</label>
+      </div>
+
+      <div className="generator-control">
+        <input
+          type="checkbox"
+          checked={isCharAllowed}
+          onChange={() => setIsCharAllowed(prev => !prev)}
+          className="checkbox-input"
+        />
+        <label className="control-label">Special Characters</label>
+      </div>
+    </div>
+
     )
 }

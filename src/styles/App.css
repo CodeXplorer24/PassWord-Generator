@@ -1,0 +1,51 @@
+body {
+    background: #17212c;
+}
+.generator-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 50px;
+  background: #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+.generator-title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 50px;
+}
+
+.generator-output {
+  margin-bottom: 20px;
+}
+
+.password-field {
+  width: 100%;
+  padding: 10px;
+  font-size: 1.3rem;
+  border: 2px solid #000000;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.generator-control {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.length-slider {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.checkbox-input {
+  margin-right: 8px;
+}
+
+.control-label {
+  font-size: 1.2rem;
+  color: #444;
+}
